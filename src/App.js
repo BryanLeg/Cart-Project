@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import Navbar from "./Navbar";
+import ShoppingCart from "./ShoppingCart";
+import { CartContext } from "./CartContext";
 
 function App() {
+  const mainData = useContext(CartContext);
+  const { state } = mainData;
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {state.isLoading ? <section> <h1 className="title">loading...</h1> <div className="loading"></div></section> : <><Navbar products={state.products} productQuantity={state.productQuantity} />
+        <ShoppingCart products={state.products} totalAmount={state.totalAmount} /></>}
+
+    </>
   );
 }
 
